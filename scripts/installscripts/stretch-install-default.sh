@@ -166,9 +166,9 @@ echo "#####################################################
             fi
             # move install to BACKUP dir
             mv RPi-Jukebox-RFID BACKUP
-            # delete .git dir
+            # backup .git dir
             if [ -d BACKUP/.git ]; then
-                sudo rm -r BACKUP/.git
+                sudo mv BACKUP/.git BACKUP/.git-backup
             fi
             # delete placeholder files so moving the folder content back later will not create git pull conflicts
             rm BACKUP/shared/audiofolders/placeholder
