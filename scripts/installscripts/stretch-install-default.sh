@@ -256,12 +256,18 @@ echo "#####################################################
 #
 # CONFIGURE AUDIO INTERFACE (iFace)
 #
-# By default for the RPi the audio interface would be 'PCM'. 
+# By default the audio interface for the RPi would be 'PCM'.
 # But this does not work for every setup, alternatives are
-# 'Master' or 'Speaker'. Other external sound cards might 
-# use different interface names. 
-# To list all available iFace names, type 'amixer scontrols'
-# in the terminal.
+# 'Master' or 'Speaker'. Other external sound cards might
+# use different interface names.
+#
+# The available devices are:
+#
+$(amixer scontrols)
+#
+# You might find something like PCM, Speaker you want choose
+# in the next steps
+#
 "
 read -r -p "Use PCM as iFace? [Y/n] " response
 case "$response" in
