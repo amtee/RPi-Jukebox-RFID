@@ -36,11 +36,15 @@ read INPUT
 # At a later stage, the install should also be done
 # from such a config file with no user input.
 
-# Remove existing config file
-rm PhonieboxInstall.conf
-# Create empty config file
-touch PhonieboxInstall.conf
-echo "# Phoniebox config" > $PATHDATA/PhonieboxInstall.conf
+# Move existing config file to backup
+if [ -f ./PhonieboxInstall.conf ];
+	then
+		 mv PhonieboxInstall.conf PhonieboxInstall.conf.backup;
+	 fi
+# Create empty config file in $HOME directory, to ensure existence even if script has been started from the repository
+touch $HOME/PhonieboxInstall.conf
+echo "PhonieboxInstall.conf has been created in directory $($HOME)"
+echo "# Phoniebox config" > $HOME/PhonieboxInstall.conf
 
 ##################################################### 
 # Ask if wifi config
@@ -63,9 +67,9 @@ case "$response" in
     	echo "Hit ENTER to proceed to the next step."
         read INPUT
         # append variables to config file
-        echo "WIFIconfig=$WIFIconfig" >> $PATHDATA/PhonieboxInstall.conf
+        echo "WIFIconfig=$WIFIconfig" >> $HOME/PhonieboxInstall.conf
         # make a fallback for WiFi Country Code, because we need that even without WiFi config
-        echo "WIFIcountryCode=GB" >> $PATHDATA/PhonieboxInstall.conf
+        echo "WIFIcountryCode=GB" >> $HOME/PhonieboxInstall.conf
         ;;
     *)
     	WIFIconfig=YES
@@ -104,12 +108,12 @@ case "$response" in
                 ;;
             *)
                 # append variables to config file
-                echo "WIFIconfig=\"$WIFIconfig\"" >> $PATHDATA/PhonieboxInstall.conf
-                echo "WIFIcountryCode=\"$WIFIcountryCode\"" >> $PATHDATA/PhonieboxInstall.conf
-                echo "WIFIssid=\"$WIFIssid\"" >> $PATHDATA/PhonieboxInstall.conf
-                echo "WIFIpass=\"$WIFIpass\"" >> $PATHDATA/PhonieboxInstall.conf
-                echo "WIFIip=\"$WIFIip\"" >> $PATHDATA/PhonieboxInstall.conf
-                echo "WIFIipRouter=\"$WIFIipRouter\"" >> $PATHDATA/PhonieboxInstall.conf
+                echo "WIFIconfig=\"$WIFIconfig\"" >> $HOME/PhonieboxInstall.conf
+                echo "WIFIcountryCode=\"$WIFIcountryCode\"" >> $HOME/PhonieboxInstall.conf
+                echo "WIFIssid=\"$WIFIssid\"" >> $HOME/PhonieboxInstall.conf
+                echo "WIFIpass=\"$WIFIpass\"" >> $HOME/PhonieboxInstall.conf
+                echo "WIFIip=\"$WIFIip\"" >> $HOME/PhonieboxInstall.conf
+                echo "WIFIipRouter=\"$WIFIipRouter\"" >> $HOME/PhonieboxInstall.conf
                 ;;
         esac
         ;;
@@ -183,7 +187,7 @@ echo "#####################################################
                     ;;
             esac
             # append variables to config file
-            echo "EXISTINGuseRfidConf=$EXISTINGuseRfidConf" >> $PATHDATA/PhonieboxInstall.conf
+            echo "EXISTINGuseRfidConf=$EXISTINGuseRfidConf" >> $HOME/PhonieboxInstall.conf
 
             read -r -p "RFID shortcuts to play audio folders? [Y/n] " response
             case "$response" in
@@ -195,7 +199,7 @@ echo "#####################################################
                     ;;
             esac
             # append variables to config file
-            echo "EXISTINGuseRfidLinks=$EXISTINGuseRfidLinks" >> $PATHDATA/PhonieboxInstall.conf
+            echo "EXISTINGuseRfidLinks=$EXISTINGuseRfidLinks" >> $HOME/PhonieboxInstall.conf
 
             read -r -p "Audio folders: use existing? [Y/n] " response
             case "$response" in
@@ -207,7 +211,7 @@ echo "#####################################################
                     ;;
             esac
             # append variables to config file
-            echo "EXISTINGuseAudio=$EXISTINGuseAudio" >> $PATHDATA/PhonieboxInstall.conf
+            echo "EXISTINGuseAudio=$EXISTINGuseAudio" >> $HOME/PhonieboxInstall.conf
 
             read -r -p "GPIO: use existing file? [Y/n] " response
             case "$response" in
@@ -219,7 +223,7 @@ echo "#####################################################
                     ;;
             esac
             # append variables to config file
-            echo "EXISTINGuseGpio=$EXISTINGuseGpio" >> $PATHDATA/PhonieboxInstall.conf
+            echo "EXISTINGuseGpio=$EXISTINGuseGpio" >> $HOME/PhonieboxInstall.conf
 
             read -r -p "Sound effects: use existing startup / shutdown sounds? [Y/n] " response
             case "$response" in
@@ -231,7 +235,7 @@ echo "#####################################################
                     ;;
             esac
             # append variables to config file
-            echo "EXISTINGuseSounds=$EXISTINGuseSounds" >> $PATHDATA/PhonieboxInstall.conf
+            echo "EXISTINGuseSounds=$EXISTINGuseSounds" >> $HOME/PhonieboxInstall.conf
 
             echo "Thanks. Got it."
             echo "The existing install can be found in the BACKUP directory."
@@ -241,7 +245,7 @@ echo "#####################################################
     esac
 fi
 # append variables to config file
-echo "EXISTINGuse=$EXISTINGuse" >> $PATHDATA/PhonieboxInstall.conf
+echo "EXISTINGuse=$EXISTINGuse" >> $HOME/PhonieboxInstall.conf
 
 ##################################################### 
 # Audio iFace
@@ -271,7 +275,7 @@ case "$response" in
         ;;
 esac
 # append variables to config file
-echo "AUDIOiFace=\"$AUDIOiFace\"" >> $PATHDATA/PhonieboxInstall.conf
+echo "AUDIOiFace=\"$AUDIOiFace\"" >> $HOME/PhonieboxInstall.conf
 echo "Your iFace ist called'$AUDIOiFace'"
 echo "Hit ENTER to proceed to the next step."
 read INPUT
@@ -305,7 +309,7 @@ case "$response" in
         ;;
 esac
 # append variables to config file
-echo "MPDconfig=\"$MPDconfig\"" >> $PATHDATA/PhonieboxInstall.conf
+echo "MPDconfig=\"$MPDconfig\"" >> $HOME/PhonieboxInstall.conf
 
 ##################################################### 
 # Folder path for audio files 
@@ -341,7 +345,7 @@ case "$response" in
         ;;
 esac
 # append variables to config file
-echo "DIRaudioFolders=\"$DIRaudioFolders\"" >> $PATHDATA/PhonieboxInstall.conf
+echo "DIRaudioFolders=\"$DIRaudioFolders\"" >> $HOME/PhonieboxInstall.conf
 echo "Your audio folders live in this dir:"
 echo $DIRaudioFolders
 echo "Hit ENTER to proceed to the next step."

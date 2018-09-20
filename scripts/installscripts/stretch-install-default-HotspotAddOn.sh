@@ -39,7 +39,7 @@ case "$response" in
         ;;
 esac
 # append variables to config file
-echo "ACCESSconfig=\"$ACCESSconfig\"" >> $PATHDATA/PhonieboxInstall.conf
+echo "ACCESSconfig=\"$ACCESSconfig\"" >> $HOME/PhonieboxInstall.conf
 
 
 ########################
