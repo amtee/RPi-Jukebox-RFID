@@ -168,7 +168,9 @@ if(isset($messageSuccess) && $messageSuccess != "") {
         <div class="form-group">
           <label class="col-md-3 control-label" for="folder"><?php print $lang['fileUploadFilesLabel']; ?></label>
            <div class="col-md-7">
-                <ol>
+
+               <!-- @Todo: remove list and set input to multiple -->
+               <ol>
                     <li> <input name="ufile[]" type="file" /></li>
                     <li> <input name="ufile[]" type="file" /></li>
                     <li> <input name="ufile[]" type="file" /></li>
