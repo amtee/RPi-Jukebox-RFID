@@ -370,10 +370,10 @@ echo "#####################################################
 read -r -p "Do you want to start the installation? [Y/n] " response
 case "$response" in
     [nN][oO]|[nN])
-    	echo "Exiting the installation."
-    	echo "Your configuration data was saved in this file:"
-    	echo $PATHDATA/PhonieboxInstall.conf
-    	echo
+        echo "Exiting the installation."
+        echo "Your configuration data was saved in this file:"
+        echo $HOME/PhonieboxInstall.conf
+        echo
         exit
         ;;
 esac
@@ -384,7 +384,7 @@ esac
 # Read install config as written so far
 # (this might look stupid so far, but makes sense once
 # the option to install from config file is introduced.)
-. $PATHDATA/PhonieboxInstall.conf
+. $HOME/PhonieboxInstall.conf
 
 # power management of wifi: switch off to avoid disconnecting
 sudo iwconfig wlan0 power off
